@@ -36,55 +36,39 @@ export default {
 </script>
 
 <style scoped>
-.single-post-page {
-  padding: 30px;
-  text-align: center;
-  box-sizing: border-box;
+.post-preview {
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 2px #ccc;
+  background-color: white;
+  width: 90%;
 }
 
-.post {
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .post {
-    width: 600px;
-    margin: auto;
-  }
-}
-
-.post-title {
-  margin: 0;
-}
-
-.post-details {
-  padding: 10px;
-  box-sizing: border-box;
-  border-bottom: 3px solid #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-@media (min-width: 768px) {
-  .post-details {
-    flex-direction: row;
-  }
-}
-
-.post-detail {
-  color: rgb(88, 88, 88);
-  margin: 0 10px;
-}
-
-.post-feedback a {
-  color: red;
+a {
   text-decoration: none;
+  color: black;
 }
 
-.post-feedback a:hover,
-.post-feedback a:active {
-  color: salmon;
+@media (min-width: 850px) {
+  .post-preview {
+    width: 400px;
+    margin: 10px;
+  }
+}
+
+.post-thumbnail {
+  width: 100%;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+}
+
+.post-content {
+  padding: 10px;
+  text-align: center;
+}
+
+a:hover .post-content,
+a:active .post-content {
+  background-color: #ccc;
 }
 </style>
