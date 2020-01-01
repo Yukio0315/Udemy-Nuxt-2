@@ -1,0 +1,60 @@
+<template>
+  <form @submit.prevent="onSave">
+    <!-- eslint-disable-next-line prettier/prettier -->
+    <AppControlInput v-model="editedPost.author">Author Name</AppControlInput>
+
+    <AppControlInput v-model="editedPost.title">Title</AppControlInput>
+
+    <!-- eslint-disable-next-line prettier/prettier -->
+    <AppControlInput v-model="editedPost.thumbnailLink">Thumbnail Link</AppControlInput>>
+    <!-- eslint-disable-next-line prettier/prettier -->
+    <AppControlInput v-model="editedPost.content" control-type="textarea">Content</AppControlInput>>
+    <AppButton type="submit">Save</AppButton>
+
+    <!-- eslint-disable-next-line prettier/prettier -->
+    <AppButton @click="onCancel" type="button" style="margin-left: 10px" btn-style="cancel">
+      >
+      <!-- eslint-disable-next-line prettier/prettier -->
+      Cancel
+    </AppButton>
+  </form>
+</template>
+
+<script>
+import AppControlInput from '@/components/UI/AppControlInput.vue'
+import AppButton from '@/components/UI/AppButton.vue'
+
+export default {
+  components: {
+    AppControlInput,
+    AppButton
+  },
+  props: {
+    post: {
+      type: Object,
+      required: false
+    }
+  },
+  data() {
+    return {
+      editedPost: this.post
+        ? { ...this.post }
+        : {
+            author: '',
+            title: '',
+            thumbnailLink: '',
+            content: ''
+          }
+    }
+  },
+  methods: {
+    onSave() {
+      //
+      console.log(this.editedPost)
+    },
+    onCancel() {
+      this.$router.push('/admin')
+    }
+  }
+}
+</script>

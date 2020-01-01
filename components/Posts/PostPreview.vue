@@ -1,6 +1,6 @@
 <template>
-  <nuxt-link :to="'/posts/' + 1">
-    <article class="post-preview">
+  <nuxt-link :to="postLink" class="post-preview">
+    <article>
       <!-- eslint-disable-next-line prettier/prettier -->
       <div :style="{ backgroundImage: 'url(' + thumbnail + ')' }" class="post-thumbnail"></div>
       <div class="post-content">
@@ -19,6 +19,10 @@ export default {
       type: String,
       required: true
     },
+    isAdmin: {
+      type: Boolean,
+      required: true
+    },
     title: {
       type: String,
       required: true
@@ -30,6 +34,11 @@ export default {
     thumbnail: {
       type: String,
       required: true
+    }
+  },
+  computed: {
+    postLink() {
+      return this.isAdmin ? '/admin/' + this.id : '/posts/' + this.id
     }
   }
 }
