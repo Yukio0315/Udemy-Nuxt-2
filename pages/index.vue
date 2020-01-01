@@ -3,7 +3,7 @@
     <section class="intro">
       <h1>Get the latest tech news!</h1>
     </section>
-    <PostList :is_admin="false" />
+    <PostList :is_admin="false" :posts="loadedPosts" />
   </div>
 </template>
 
@@ -13,6 +13,28 @@ import PostList from '@/components/Posts/PostList'
 export default {
   components: {
     PostList
+  },
+  data() {
+    return {
+      loadedPosts: [
+        {
+          id: '1',
+          author: 'Test',
+          previewText: 'test',
+          title: 'Title',
+          content: 'This is sample',
+          thumbnail: ''
+        },
+        {
+          id: '2',
+          author: 'Test',
+          previewText: 'test2',
+          title: 'Title2',
+          content: 'This is sample2',
+          thumbnail: ''
+        }
+      ]
+    }
   }
 }
 </script>
