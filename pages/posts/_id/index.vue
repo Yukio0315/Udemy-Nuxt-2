@@ -4,7 +4,9 @@
       <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
         <!-- eslint-disable-next-line prettier/prettier -->
-        <div class="post-detail">Last updated on {{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">
+          Last updated on {{ loadedPost.updatedDate }}
+        </div>
         <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
       <p>{{ loadedPost.content }}</p>
@@ -20,19 +22,20 @@
 </template>
 
 <script>
+import firebase from '~/plugins/firebase'
+
 export default {
-  asyncData(context, callback) {
-    callback(null, {
-      loadedPost: {
-        id: '1',
-        title: 'Title (ID: ' + context.route.params.id + ')',
-        previewText: 'test',
-        author: 'Test',
-        updatedDate: new Date(),
-        content: 'This is sample',
-        thumbnail: ''
-      }
-    })
+  async asyncData(context) {
+    let result = {}
+    await firebase
+      .database()
+      .ref(context.params.id)
+      .once('value')
+      .then((s) => {
+        result = s.val()
+      })
+      .catch((e) => context.error(e))
+    return { loadedPost: result }
   }
 }
 </script>

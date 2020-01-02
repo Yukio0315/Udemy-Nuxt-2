@@ -58,12 +58,14 @@ export default {
             title: '',
             thumbnail: '',
             content: '',
-            previewText: ''
+            previewText: '',
+            updatedDate: ''
           }
     }
   },
   methods: {
     onSave() {
+      this.editedPost.updatedDate = new Date().toString()
       this.$emit('submit', this.editedPost)
     },
     onCancel() {
