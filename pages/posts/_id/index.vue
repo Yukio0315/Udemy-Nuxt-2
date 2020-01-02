@@ -5,7 +5,7 @@
       <div class="post-details">
         <!-- eslint-disable-next-line prettier/prettier -->
         <div class="post-detail">
-          Last updated on {{ loadedPost.updatedDate }}
+          Last updated on {{ loadedPost.updatedDate | date }}
         </div>
         <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
@@ -36,6 +36,9 @@ export default {
       })
       .catch((e) => context.error(e))
     return { loadedPost: result }
+  },
+  head: {
+    title: 'A blog post'
   }
 }
 </script>

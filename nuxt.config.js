@@ -25,15 +25,23 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#f00', height: '4px', duration: 5000 },
+  loadingIndicator: {
+    name: 'circle',
+    color: '#fa923f'
+  },
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['~/assets/styles/main.css'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/firebase'],
+  plugins: [
+    '~/plugins/firebase',
+    '~/plugins/core-components',
+    '~/plugins/date-filter'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -45,7 +53,11 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  // modules: ['@nuxt.js/axios'],
+  // axios: {
+  //   baseURL: process.env.BASE_URL || '',
+  //   credentials: false
+  // },
   /*
    ** Build configuration
    */
@@ -54,5 +66,12 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || ''
+  },
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
   }
 }

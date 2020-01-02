@@ -7,13 +7,8 @@
 </template>
 
 <script>
-import AdminPostForm from '@/components/Admin/AdminPostForm.vue'
-
 export default {
   layout: 'admin',
-  components: {
-    AdminPostForm
-  },
   methods: {
     onSubmitted(postData) {
       this.$store

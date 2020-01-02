@@ -13,6 +13,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.9.0",
     "core-js": "2.6.11",
     "firebase": "^7.6.1",
     "nuxt": "^2.0.0"
