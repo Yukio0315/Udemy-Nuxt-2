@@ -6,13 +6,26 @@
     <AppControlInput v-model="editedPost.title">Title</AppControlInput>
 
     <!-- eslint-disable-next-line prettier/prettier -->
-    <AppControlInput v-model="editedPost.thumbnailLink">Thumbnail Link</AppControlInput>>
+    <AppControlInput v-model="editedPost.thumbnail"
+      >Thumbnail Link</AppControlInput
+    >>
     <!-- eslint-disable-next-line prettier/prettier -->
-    <AppControlInput v-model="editedPost.content" control-type="textarea">Content</AppControlInput>>
+    <AppControlInput v-model="editedPost.content" control-type="textarea"
+      >Content</AppControlInput
+    >
+    <!-- eslint-disable-next-line prettier/prettier -->
+    <AppControlInput v-model="editedPost.previewText" control-type="textarea"
+      >PreviewText</AppControlInput
+    >
     <AppButton type="submit">Save</AppButton>
 
     <!-- eslint-disable-next-line prettier/prettier -->
-    <AppButton @click="onCancel" type="button" style="margin-left: 10px" btn-style="cancel">
+    <AppButton
+      @click="onCancel"
+      type="button"
+      style="margin-left: 10px"
+      btn-style="cancel"
+    >
       >
       <!-- eslint-disable-next-line prettier/prettier -->
       Cancel
@@ -33,6 +46,7 @@ export default {
     post: {
       type: Object,
       required: false
+      // default: () => {}
     }
   },
   data() {
@@ -42,15 +56,15 @@ export default {
         : {
             author: '',
             title: '',
-            thumbnailLink: '',
-            content: ''
+            thumbnail: '',
+            content: '',
+            previewText: ''
           }
     }
   },
   methods: {
     onSave() {
-      //
-      console.log(this.editedPost)
+      this.$emit('submit', this.editedPost)
     },
     onCancel() {
       this.$router.push('/admin')

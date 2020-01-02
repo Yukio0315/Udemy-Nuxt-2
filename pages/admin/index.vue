@@ -2,11 +2,13 @@
   <div class="admin-page">
     <section class="new-post">
       <!-- eslint-disable-next-line prettier/prettier -->
-      <AppButton @click="$router.push('/admin/new-post')">Create Post</AppButton>
+      <AppButton @click="$router.push('/admin/new-post')"
+        >Create Post</AppButton
+      >
     </section>
     <section class="existing-posts">
       <h1>Existing Posts</h1>
-      <PostList is-admin />
+      <PostList :posts="loadedPosts" is-admin />
     </section>
   </div>
 </template>
@@ -20,6 +22,11 @@ export default {
   components: {
     PostList,
     AppButton
+  },
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts
+    }
   }
 }
 </script>

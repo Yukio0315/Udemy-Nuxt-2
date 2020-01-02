@@ -1,17 +1,27 @@
 <template>
   <div class="admin-new-post-page">
     <section class="new-post-form">
-      <AdminPostForm />
+      <AdminPostForm @submit="onSubmitted" />
     </section>
   </div>
 </template>
 
 <script>
 import AdminPostForm from '@/components/Admin/AdminPostForm.vue'
+import firebase from '~/plugins/firebase'
+
 export default {
   layout: 'admin',
   components: {
     AdminPostForm
+  },
+  methods: {
+    onSubmitted(postData) {
+      firebase
+        .database()
+        .ref()
+        .push(postData)
+    }
   }
 }
 </script>

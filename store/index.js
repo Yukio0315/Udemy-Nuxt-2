@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import firebase from '~/plugins/firebase'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -12,35 +13,18 @@ const createStore = () => {
     },
     actions: {
       nuxtServerInit(vuexContext, context) {
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            vuexContext.commit('setPosts', [
-              {
-                id: '1',
-                // author: 'Test',
-                previewText: 'test',
-                title: 'Title',
-                // content: 'This is sample',
-                thumbnail: ''
-              },
-              {
-                id: '2',
-                // author: 'Test',
-                previewText: 'test2',
-                title: 'Title2',
-                // content: 'This is sample2',
-                thumbnail: ''
-              }
-            ])
-            resolve()
-          }, 1000)
-        })
-          .then((data) => {
-            context.store.commit('setPosts', data.createdPosts)
+        return firebase
+          .database()
+          .ref()
+          .once('value')
+          .then((s) => {
+            const postsArray = []
+            for (const key in s.val()) {
+              postsArray.push({ ...s.val()[key], id: key })
+            }
+            vuexContext.commit('setPosts', postsArray)
           })
-          .catch((e) => {
-            context.error(new Error())
-          })
+          .catch((e) => context.error(e))
       },
       setPosts(vuexContext, posts) {
         vuexContext.commit('setPosts', posts)
