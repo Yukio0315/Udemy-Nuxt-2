@@ -9,6 +9,15 @@ const createStore = () => {
     mutations: {
       setPosts(state, posts) {
         state.loadedPosts = posts
+      },
+      addPost(state, post) {
+        state.loadedPosts.push(post)
+      },
+      editPost(state, editedPost) {
+        const postIndex = state.loadedPosts.findIndex(
+          (post) => post.id === editedPost.id
+        )
+        state.loadedPosts[postIndex] = editedPost
       }
     },
     actions: {
@@ -28,6 +37,20 @@ const createStore = () => {
       },
       setPosts(vuexContext, posts) {
         vuexContext.commit('setPosts', posts)
+      },
+      addPost(vuexContext, post) {
+        firebase
+          .database()
+          .ref()
+          .push(post)
+          .then(vuexContext.commit('addPost', post))
+      },
+      editPost(vuexContext, editedPost) {
+        firebase
+          .database()
+          .ref(editedPost.id)
+          .update(editedPost)
+          .then(vuexContext.commit('editPost', editedPost))
       }
     },
     getters: {

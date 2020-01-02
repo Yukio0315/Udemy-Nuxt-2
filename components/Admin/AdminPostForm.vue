@@ -45,8 +45,8 @@ export default {
   props: {
     post: {
       type: Object,
-      required: false
-      // default: () => {}
+      required: false,
+      default: () => {}
     }
   },
   data() {

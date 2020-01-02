@@ -8,7 +8,6 @@
 
 <script>
 import AdminPostForm from '@/components/Admin/AdminPostForm.vue'
-import firebase from '~/plugins/firebase'
 
 export default {
   layout: 'admin',
@@ -17,10 +16,9 @@ export default {
   },
   methods: {
     onSubmitted(postData) {
-      firebase
-        .database()
-        .ref()
-        .push(postData)
+      this.$store
+        .dispatch('addPost', postData)
+        .then(() => this.$router.push('/admin'))
     }
   }
 }

@@ -1,26 +1,38 @@
 <template>
   <div class="admin-post-page">
     <section class="update-form">
-      <AdminPostForm :post="loadedPost" />
+      <AdminPostForm :post="loadedPost" @submit="onSubmitted" />
     </section>
   </div>
 </template>
 
 <script>
 import AdminPostForm from '@/components/Admin/AdminPostForm'
+import firebase from '~/plugins/firebase'
+
 export default {
   layout: 'admin',
   components: {
     AdminPostForm
   },
-  data() {
-    return {
-      loadedPost: {
-        author: 'test',
-        title: 'sample',
-        content: 'sample',
-        thumbnailLink: ''
-      }
+  async asyncData(context) {
+    let result = {}
+    await firebase
+      .database()
+      .ref(context.params.postId)
+      .once('value')
+      .then((s) => {
+        result = s.val()
+        result.id = context.params.postId
+      })
+      .catch((e) => context.error(e))
+    return { loadedPost: result }
+  },
+  methods: {
+    onSubmitted(editedPost) {
+      this.$store
+        .dispatch('editPost', editedPost)
+        .then(() => this.$router.push('/admin'))
     }
   }
 }
