@@ -14,26 +14,9 @@ export default {
   components: {
     PostList
   },
-  data() {
-    return {
-      loadedPosts: [
-        {
-          id: '1',
-          author: 'Test',
-          previewText: 'test',
-          title: 'Title',
-          content: 'This is sample',
-          thumbnail: ''
-        },
-        {
-          id: '2',
-          author: 'Test',
-          previewText: 'test2',
-          title: 'Title2',
-          content: 'This is sample2',
-          thumbnail: ''
-        }
-      ]
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts
     }
   }
 }
