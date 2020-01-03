@@ -2,7 +2,10 @@
   <nuxt-link :to="postLink" class="post-preview">
     <article>
       <!-- eslint-disable-next-line prettier/prettier -->
-      <div :style="{ backgroundImage: 'url(' + thumbnail + ')' }" class="post-thumbnail"></div>
+      <div
+        :style="{ backgroundImage: 'url(' + thumbnail + ')' }"
+        class="post-thumbnail"
+      ></div>
       <div class="post-content">
         <h1>{{ title }}</h1>
         <p>{{ previewText }}</p>
@@ -17,7 +20,8 @@ export default {
   props: {
     id: {
       type: String,
-      required: true
+      required: false,
+      default: ''
     },
     isAdmin: {
       type: Boolean,
