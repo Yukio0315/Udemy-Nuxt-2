@@ -53,11 +53,11 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  // modules: ['@nuxt.js/axios'],
-  // axios: {
-  //   baseURL: process.env.BASE_URL || '',
-  //   credentials: false
-  // },
+  modules: ['@nuxtjs/axios'],
+  axios: {
+    baseURL: process.env.BASE_URL || '',
+    credentials: false
+  },
   /*
    ** Build configuration
    */
@@ -73,5 +73,8 @@ export default {
   transition: {
     name: 'fade',
     mode: 'out-in'
+  },
+  router: {
+    middleware: 'log'
   }
 }
