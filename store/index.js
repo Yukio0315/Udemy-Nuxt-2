@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import moment from 'moment'
+import Cookie from 'js-cookie'
 import firebase from '~/plugins/firebase'
 
 const createStore = () => {
@@ -84,6 +85,8 @@ const createStore = () => {
             vuexContext.commit('setToken', result.token)
             localStorage.setItem('token', result.token)
             localStorage.setItem('tokenExpiration', result.expirationTime)
+            Cookie.set('jwt', result.token)
+            Cookie.set('expirationDate', result.expirationTime)
             vuexContext.dispatch(
               'setLogoutTimer',
               moment(result.expirationTime).diff(moment())
@@ -95,12 +98,33 @@ const createStore = () => {
           vuexContext.commit('clearToken')
         }, duration)
       },
-      initAuth(vuexContext) {
-        const token = localStorage.getItem('token')
-        const expirationDate = localStorage.getItem('tokenExpiration')
+      initAuth(vuexContext, req) {
+        let token = ''
+        let expirationDate = ''
+        if (req) {
+          if (req) {
+            if (!req.headers.cookie) {
+              return
+            }
+          }
+          const jwtCookie = req.headers.cookie
+            .split(';')
+            .find((c) => c.trim().startsWith('jwt='))
+          if (!jwtCookie) {
+            return
+          }
+          token = jwtCookie.split('=')[1]
+          expirationDate = req.headers.cookie
+            .split(';')
+            .find((c) => c.trim().startsWith('expirationDate='))
+            .split('=')[1]
+        } else {
+          token = localStorage.getItem('token')
+          expirationDate = localStorage.getItem('tokenExpiration')
 
-        if (new Date().getTime() > +expirationDate || !token) {
-          return
+          if (new Date().getTime() > +expirationDate || !token) {
+            return
+          }
         }
         vuexContext.dispatch(
           'setLogoutTimer',
