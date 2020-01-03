@@ -5,6 +5,8 @@
       <AppButton @click="$router.push('/admin/new-post')"
         >Create Post</AppButton
       >
+      <!-- eslint-disable-next-line prettier/prettier -->
+      <AppButton @click="onLogout" style="margin-left: 10px">Logout</AppButton>
     </section>
     <section class="existing-posts">
       <h1>Existing Posts</h1>
@@ -20,6 +22,12 @@ export default {
   computed: {
     loadedPosts() {
       return this.$store.getters.loadedPosts
+    }
+  },
+  methods: {
+    onLogout() {
+      this.$store.dispatch('logout')
+      this.$router.push('/admin/auth')
     }
   }
 }

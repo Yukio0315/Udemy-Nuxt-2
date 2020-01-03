@@ -8,7 +8,7 @@
     <!-- eslint-disable-next-line prettier/prettier -->
     <AppControlInput v-model="editedPost.thumbnail"
       >Thumbnail Link</AppControlInput
-    >>
+    >
     <!-- eslint-disable-next-line prettier/prettier -->
     <AppControlInput v-model="editedPost.content" control-type="textarea"
       >Content</AppControlInput
@@ -26,7 +26,6 @@
       style="margin-left: 10px"
       btn-style="cancel"
     >
-      >
       <!-- eslint-disable-next-line prettier/prettier -->
       Cancel
     </AppButton>
